@@ -34,21 +34,23 @@
     width: 90px;
     height: 90px;
 
-    background: rgb(37, 37, 37);
+    background: var(--dark-color);
+    border-radius: 4px;
 }
 
 .big-dark-square-empty {
     width: 50px;
     height: 50px;
 
-    border: 20px solid rgb(37, 37, 37);
+    border: 20px solid var(--dark-color);
+    border-radius: 4px;
 }
 
 .big-dark-round-full {
     width: 90px;
     height: 90px;
 
-    background: rgb(37, 37, 37);
+    background: var(--dark-color);
 
     border-radius: 50%;
 }
@@ -57,7 +59,7 @@
     width: 50px;
     height: 50px;
 
-    border: 20px solid rgb(37, 37, 37);
+    border: 20px solid var(--dark-color);
 
     border-radius: 50%;
 }
@@ -66,21 +68,23 @@
     width: 60px;
     height: 60px;
 
-    background: rgb(37, 37, 37);
+    background: var(--dark-color);
+    border-radius: 4px;
 }
 
 .small-dark-square-empty {
     width: 20px;
     height: 20px;
 
-    border: 20px solid rgb(37, 37, 37);
+    border: 20px solid var(--dark-color);
+    border-radius: 4px;
 }
 
 .small-dark-round-full {
     width: 60px;
     height: 60px;
 
-    background: rgb(37, 37, 37);
+    background: var(--dark-color);
 
     border-radius: 50%;
 }
@@ -89,7 +93,7 @@
     width: 20px;
     height: 20px;
 
-    border: 20px solid rgb(37, 37, 37);
+    border: 20px solid var(--dark-color);
 
     border-radius: 50%;
 }
@@ -98,21 +102,23 @@
     width: 90px;
     height: 90px;
 
-    background: rgb(165, 165, 165);
+    background: var(--clear-color);
+    border-radius: 4px;
 }
 
 .big-clear-square-empty {
     width: 50px;
     height: 50px;
 
-    border: 20px solid rgb(165, 165, 165);
+    border: 20px solid var(--clear-color);
+    border-radius: 4px;
 }
 
 .big-clear-round-full {
     width: 90px;
     height: 90px;
 
-    background: rgb(165, 165, 165);
+    background: var(--clear-color);
 
     border-radius: 50%;
 }
@@ -121,7 +127,7 @@
     width: 50px;
     height: 50px;
 
-    border: 20px solid rgb(165, 165, 165);
+    border: 20px solid var(--clear-color);
 
     border-radius: 50%;
 }
@@ -130,21 +136,23 @@
     width: 60px;
     height: 60px;
 
-    background: rgb(165, 165, 165);
+    background: var(--clear-color);
+    border-radius: 4px;
 }
 
 .small-clear-square-empty {
     width: 20px;
     height: 20px;
 
-    border: 20px solid rgb(165, 165, 165);
+    border: 20px solid var(--clear-color);
+    border-radius: 4px;
 }
 
 .small-clear-round-full {
     width: 60px;
     height: 60px;
 
-    background: rgb(165, 165, 165);
+    background: var(--clear-color);
 
     border-radius: 50%;
 }
@@ -153,7 +161,7 @@
     width: 20px;
     height: 20px;
 
-    border: 20px solid rgb(165, 165, 165);
+    border: 20px solid var(--clear-color);
 
     border-radius: 50%;
 }

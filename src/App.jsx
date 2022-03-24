@@ -5,6 +5,8 @@ import './App.css';
 import PiecesPool from './components/PiecesPool/PiecesPool';
 import QuartoBoard from './components/QuartoBoard/QuartoBoard';
 
+import GameLogic from './GameLogic'
+
 function App() {
     const [gameBoard, setGameBoard] = useState(
         [
@@ -18,15 +20,22 @@ function App() {
     const [selectedPiece, setSelectedPiece] = useState('')
     const [usedPieces, setUsedPieces] = useState([])
 
+    const gameLevel = 1
+
     const pieceSelected = (pieceDesc) => {
         setSelectedPiece(pieceDesc)
     }
 
     const tileSelected = (number) => {
         if (gameBoard[number] === "") {
-            setGameBoard(gameBoard.map ((tile, index) => index === number ? selectedPiece : tile))
+            let board = gameBoard.map ((tile, index) => index === number ? selectedPiece : tile)
+            setGameBoard(board)
             setUsedPieces([...usedPieces, selectedPiece])
             setSelectedPiece('')
+
+            if (GameLogic.checkForAWin(board, gameLevel)) {
+                console.log("****************** win")
+            }
         }
     }
 

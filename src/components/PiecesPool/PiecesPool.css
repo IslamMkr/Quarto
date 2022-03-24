@@ -1,7 +1,4 @@
 .pieces-pool {
-    width: 100%;
-
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
 }
