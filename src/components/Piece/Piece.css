@@ -1,0 +1,159 @@
+.piece {
+    width: 100px;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.piece:hover {
+    width: 96px;
+    height: 96px;
+    background:rgb(218, 235, 210);
+
+    border: 2px solid rgb(162, 221, 135);
+    border-radius: 5px;
+}
+
+.clicked {
+    width: 96px;
+    height: 96px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background:rgb(218, 235, 210);
+
+    border: 2px solid rgb(162, 221, 135);
+    border-radius: 5px;
+}
+
+.big-dark-square-full {
+    width: 90px;
+    height: 90px;
+
+    background: rgb(37, 37, 37);
+}
+
+.big-dark-square-empty {
+    width: 50px;
+    height: 50px;
+
+    border: 20px solid rgb(37, 37, 37);
+}
+
+.big-dark-round-full {
+    width: 90px;
+    height: 90px;
+
+    background: rgb(37, 37, 37);
+
+    border-radius: 50%;
+}
+
+.big-dark-round-empty {
+    width: 50px;
+    height: 50px;
+
+    border: 20px solid rgb(37, 37, 37);
+
+    border-radius: 50%;
+}
+
+.small-dark-square-full {
+    width: 60px;
+    height: 60px;
+
+    background: rgb(37, 37, 37);
+}
+
+.small-dark-square-empty {
+    width: 20px;
+    height: 20px;
+
+    border: 20px solid rgb(37, 37, 37);
+}
+
+.small-dark-round-full {
+    width: 60px;
+    height: 60px;
+
+    background: rgb(37, 37, 37);
+
+    border-radius: 50%;
+}
+
+.small-dark-round-empty {
+    width: 20px;
+    height: 20px;
+
+    border: 20px solid rgb(37, 37, 37);
+
+    border-radius: 50%;
+}
+
+.big-clear-square-full {
+    width: 90px;
+    height: 90px;
+
+    background: rgb(165, 165, 165);
+}
+
+.big-clear-square-empty {
+    width: 50px;
+    height: 50px;
+
+    border: 20px solid rgb(165, 165, 165);
+}
+
+.big-clear-round-full {
+    width: 90px;
+    height: 90px;
+
+    background: rgb(165, 165, 165);
+
+    border-radius: 50%;
+}
+
+.big-clear-round-empty {
+    width: 50px;
+    height: 50px;
+
+    border: 20px solid rgb(165, 165, 165);
+
+    border-radius: 50%;
+}
+
+.small-clear-square-full {
+    width: 60px;
+    height: 60px;
+
+    background: rgb(165, 165, 165);
+}
+
+.small-clear-square-empty {
+    width: 20px;
+    height: 20px;
+
+    border: 20px solid rgb(165, 165, 165);
+}
+
+.small-clear-round-full {
+    width: 60px;
+    height: 60px;
+
+    background: rgb(165, 165, 165);
+
+    border-radius: 50%;
+}
+
+.small-clear-round-empty {
+    width: 20px;
+    height: 20px;
+
+    border: 20px solid rgb(165, 165, 165);
+
+    border-radius: 50%;
+}

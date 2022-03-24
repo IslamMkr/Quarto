@@ -1,0 +1,15 @@
+.tile {
+    width: 100px;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid rgb(223, 223, 223);
+    border-radius: 4px;
+}
+
+.tile:hover {
+    background:rgb(218, 235, 210);
+}
