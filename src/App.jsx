@@ -1,51 +1,30 @@
-import { useState } from 'react';
+import { 
+    BrowserRouter, 
+    Route, 
+    Routes 
+} from "react-router-dom"
 
 import './App.css';
 
-import PiecesPool from './components/PiecesPool/PiecesPool';
-import QuartoBoard from './components/QuartoBoard/QuartoBoard';
-
-import GameLogic from './GameLogic'
+import Header from './components/Header/Header'
+import Play from './pages/Play/Play'
+import Learn from './pages/Learn/Learn'
 
 function App() {
-    const [gameBoard, setGameBoard] = useState(
-        [
-        '', '', '', '',
-        '', '', '', '',
-        '', '', '', '',
-        '', '', '', ''
-        ]
-    )
-
-    const [selectedPiece, setSelectedPiece] = useState('')
-    const [usedPieces, setUsedPieces] = useState([])
-
-    const gameLevel = 1
-
-    const pieceSelected = (pieceDesc) => {
-        setSelectedPiece(pieceDesc)
-    }
-
-    const tileSelected = (number) => {
-        if (gameBoard[number] === "") {
-            let board = gameBoard.map ((tile, index) => index === number ? selectedPiece : tile)
-            setGameBoard(board)
-            setUsedPieces([...usedPieces, selectedPiece])
-            setSelectedPiece('')
-
-            if (GameLogic.checkForAWin(board, gameLevel)) {
-                console.log("****************** win")
-            }
-        }
-    }
-
     return (
-        <div className="App">
-            <div className='play-zone'>
-                <QuartoBoard gameBoard={gameBoard} onTileSelected={tileSelected} />
-                <PiecesPool usedPieces={usedPieces}  onPieceSelected={pieceSelected} />
+        <BrowserRouter>
+            <div className="App">
+                <div className='main-content'>
+                    <Header />
+                    <div className='container'>
+                        <Routes>
+                            <Route exact path='/' element={ <Play /> } />
+                            <Route exact path='/learn' element={ <Learn /> } />
+                        </Routes>
+                    </div>
+                </div>
             </div>
-        </div>
+        </BrowserRouter>
     );
 }
 
