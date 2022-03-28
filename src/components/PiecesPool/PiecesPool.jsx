@@ -25,10 +25,8 @@ const initialPieces = [
 
 const PiecesPool = ({ usedPieces, onPieceSelected }) => {
     const [pieces, setPieces] = useState(initialPieces)
-    const [pieceSeleceted, setPieceSeleceted] = useState('')
 
     const pieceClicked = (pieceDesc) => {
-        setPieceSeleceted(pieceDesc)
         onPieceSelected(pieceDesc)
     }
 
@@ -41,18 +39,10 @@ const PiecesPool = ({ usedPieces, onPieceSelected }) => {
         <div className='pieces-pool'>
             {
                 pieces.map ( pieceDesc => 
-                    pieceDesc === pieceSeleceted ?
-                        <Piece key={pieces.indexOf(pieceDesc)} 
-                            pieceNumber={pieces.indexOf(pieceDesc)}
-                            pieceDesc={pieceDesc} 
-                            selected={true}
-                            onClick={pieceClicked} />
-                        :
-                        <Piece key={pieces.indexOf(pieceDesc)} 
-                            pieceNumber={pieces.indexOf(pieceDesc)}
-                            pieceDesc={pieceDesc} 
-                            selected={false}
-                            onClick={pieceClicked} />
+                    <Piece key={pieces.indexOf(pieceDesc)} 
+                        pieceNumber={pieces.indexOf(pieceDesc)}
+                        pieceDesc={pieceDesc} 
+                        onClick={pieceClicked} />
                 )
             }
         </div>

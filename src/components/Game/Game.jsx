@@ -6,6 +6,7 @@ import PiecesPool from '../PiecesPool/PiecesPool'
 import QuartoBoard from '../QuartoBoard/QuartoBoard'
 
 import GameLogic from '../../GameLogic'
+import InstructionBoard from '../InstructionBoard/InstructionBoard'
 
 const Game = () => {
     const [gameBoard, setGameBoard] = useState(
@@ -41,6 +42,8 @@ const Game = () => {
 
     return (
         <div className='game'>
+            <InstructionBoard piece={selectedPiece} />
+            <hr />
             <div className='play-zone'>
                 <QuartoBoard gameBoard={gameBoard} onTileSelected={tileSelected} />
                 <PiecesPool usedPieces={usedPieces}  onPieceSelected={pieceSelected} />

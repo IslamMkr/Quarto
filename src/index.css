@@ -17,6 +17,26 @@ code {
 }
 
 :root {
-  --clear-color: #ECC026;
-  --dark-color: rgb(116, 110, 29);
+  --clear-color: #eb9e9e;
+  --dark-color: rgb(49, 48, 88);
+}
+
+.btn {
+  width: 100px;
+  height: 45px;
+
+  font-weight: bold;
+
+  color: white;
+  background: #30724e;
+
+  border: 1px solid #30724e;
+  border-radius: 6px;
+
+  cursor: pointer;
+}
+
+.btn:hover {
+  border: 1px solid #62c58f;
+  background: #62c58f;
 }
