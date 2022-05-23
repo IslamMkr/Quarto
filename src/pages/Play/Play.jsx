@@ -7,7 +7,7 @@ import Game from '../../components/Game/Game'
 const Play = () => {
     return (
         <div className='play'>
-            <Game />
+            <Game gameLevel={1}/>
         </div>
     )
 }
