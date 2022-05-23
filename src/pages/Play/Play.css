@@ -1,8 +1,39 @@
 .play {
-    width: 100%;
-    height: auto;
+    width: 100vw;
+    height: 90vh;
 
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.new-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 50px;
+}
+
+.levels {
+    width: fit-content;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.level {
+    padding: 20px 40px;
+    border: 1px solid rgb(143, 143, 143);
+    border-radius: 4px;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.level:hover {
+    background-color: rgb(250, 255, 248);
+    border-color: rgb(162, 221, 135);
 }

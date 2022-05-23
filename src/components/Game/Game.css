@@ -5,8 +5,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    padding-top: 50px;
 }
 
 .play-zone {
@@ -27,7 +25,8 @@
 }
 
 .instructions {
-    width: 100%;
+    width: 50%;
+    height: 160px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -61,4 +60,13 @@
 
 .player {
     font-weight: bolder;
+}
+
+.confirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    gap: 8px;
 }
