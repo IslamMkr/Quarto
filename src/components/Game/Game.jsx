@@ -15,9 +15,10 @@ import {
 } from "../../TreeUtils"
 
 import {
-    Tree, 
-    TreeNode
+    Tree
 } from "../../Tree"
+
+import minimax from "../../algorithms/Minimax"
 
 /**
  * Description des pièces du jeu
@@ -99,6 +100,8 @@ const Game = ({ gameLevel, newGame }) => {
 
     const [playing, setPlaying] = useState(true)
 
+    const [evaluation, setEvaluation] = useState(0)
+
     /**
      * Si le jeu est en cours, cette fonction permet d'actualiser 
      * l'etat de la pièce selectionné
@@ -170,6 +173,8 @@ const Game = ({ gameLevel, newGame }) => {
                         let remainingPieces = initialPieces.filter (piece => !usedPieces.includes(piece))
                         // Générer l'arbre du jeu
                         let createdTree = createTree(tree, remainingPieces, 1)
+                        setEvaluation(minimax(tree.root, createdTree, true))
+                        console.log(evaluation)
                     }
                 }
 

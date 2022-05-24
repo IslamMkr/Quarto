@@ -10,8 +10,6 @@ const createTree = (tree, pieces, depth = 1) => {
     if (depth === 0) {
         return tree
     }
-
-    console.log("depth ", depth, " : before iteration : \n", [...tree.postOrderTraversal()])
     
     const leafs = [...tree.preOrderTraversal()].filter(node => node.isLeaf)
 
@@ -34,8 +32,6 @@ const createTree = (tree, pieces, depth = 1) => {
             }
         }
     }
-
-    console.log("depth ", depth, " : after iteration : \n", [...tree.postOrderTraversal()])
     
     createTree(tree, pieces, depth - 1)
 }
