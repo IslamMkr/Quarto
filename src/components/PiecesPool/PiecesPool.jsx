@@ -4,6 +4,9 @@ import Piece from '../Piece/Piece';
 
 import './PiecesPool.css'
 
+/**
+ * Les pièces
+ */
 const initialPieces = [
         "big-dark-square-full",
         "big-dark-square-empty",
@@ -23,9 +26,22 @@ const initialPieces = [
         "small-clear-round-empty"
     ]
 
+/**
+ * Représentation de la zone des pièces
+ * 
+ * @param {usedPieces, onPieceSelected} 
+ * usedPieces : les pièces utilisées
+ * onPieceSelected : fonction qui gère la selection d'une pièce 
+ * @returns 
+ */
 const PiecesPool = ({ usedPieces, onPieceSelected }) => {
     const [pieces, setPieces] = useState(initialPieces)
 
+    /**
+     * Permet de notifier le composant Game qu'une pièce est selectionné.
+     * 
+     * @param {*} pieceDesc description de la pièce selectionné 
+     */
     const pieceClicked = (pieceDesc) => {
         onPieceSelected(pieceDesc)
     }

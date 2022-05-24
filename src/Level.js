@@ -1,3 +1,11 @@
+/**
+ * Vérifie si la partie est terminé.
+ * 
+ * @param {*} gameBoard tableau du jeu  
+ * @param {*} gameLevel niveau du jeu
+ * 
+ * @returns true si quelqu'un a gagné, false sinon
+ */
 exports.checkForAWin = (gameBoard, gameLevel) => {
     if (gameLevel === 1) {
         return levelOne(gameBoard)
@@ -12,6 +20,7 @@ exports.checkForAWin = (gameBoard, gameLevel) => {
     return undefined
 }
 
+// Configurations gagnante niveau 1
 const levelOneChecks = [
       [0, 1, 2, 3],   
       [4, 5, 6, 7],
@@ -25,6 +34,7 @@ const levelOneChecks = [
       [12, 9, 6, 3]
 ];
 
+// Configurations gagnante niveau 2
 const levelTwoChecks = [
     [0, 1, 4, 5],
     [1, 2, 5, 6],
@@ -37,6 +47,7 @@ const levelTwoChecks = [
     [10, 11, 14, 15]
 ]
 
+// Configurations gagnante niveau 3
 const levelThreeChecks = [
     [0, 2, 8, 10],
     [1, 3, 9, 11],
@@ -44,6 +55,7 @@ const levelThreeChecks = [
     [5, 7, 13, 15]
 ]
 
+// Configurations gagnante niveau 4
 const levelFourChecks = [
     [1, 4, 6, 9],
     [2, 5, 7, 10],
@@ -53,6 +65,9 @@ const levelFourChecks = [
     [1, 7, 8, 14]
 ]
 
+/**
+ * Vérifie la victoire en niveau 1
+ */
 const levelOne = (gameBoard) => {
     const tileDesc = gameBoard.map (tile => tile.split("-"))
     
@@ -74,6 +89,9 @@ const levelOne = (gameBoard) => {
     return false
 }
 
+/**
+ * Vérifie la victoire en niveau 2
+ */
 const levelTwo = (gameBoard) => {
     if (levelOne(gameBoard)) {
         return true
@@ -99,6 +117,9 @@ const levelTwo = (gameBoard) => {
     return false
 }
 
+/**
+ * Vérifie la victoire en niveau 3
+ */
 const levelThree = (gameBoard) => {
     if (levelTwo(gameBoard)) {
         return true
@@ -124,6 +145,9 @@ const levelThree = (gameBoard) => {
     return false
 }
 
+/**
+ * Vérifie la victoire en niveau 4
+ */
 const levelFour = (gameBoard) => {
     if (levelThree(gameBoard)) {
         return true

@@ -14,6 +14,19 @@ import {
     copy
 } from "../../TreeUtils"
 
+import {
+    Tree, 
+    TreeNode
+} from "../../Tree"
+
+/**
+ * Description des pièces du jeu
+ * 
+ * TAILLE (GRAND/PETIT)
+ * COULEUR (CLAIR/FONCE)
+ * FORME (CARRE/ROND)
+ * CLARITE (PLEIN/VIDE)
+ */
 const initialPieces = [
         "big-dark-square-full",
         "big-dark-square-empty",
@@ -33,17 +46,35 @@ const initialPieces = [
         "small-clear-round-empty"
     ]
 
+/**
+ * Instructions pour les joueurs
+ */
 const todos = [
     "Placez la pièce sur l'échequier",
     "Choisissez une pièce et confirmez"
 ]
 
+/**
+ * Les deux joueurs
+ */
 const players = [
     "Joueur 01",
     "Joueur 02"
 ]
 
+/**
+ * Le composant résponsable de la méchanique du jeu.
+ * 
+ * @param {gameLevel, newGame}
+ * gameLevel : le niveau du jeu
+ * newGame : fonction pour créer une nouvelle partie  
+ * @returns 
+ */
 const Game = ({ gameLevel, newGame }) => {
+
+    /**
+     * Etat initial de l'échequier, représenté par un tableau de 16 cases.
+     */
     const [gameBoard, setGameBoard] = useState(
         [
         '', '', '', '',
@@ -53,8 +84,12 @@ const Game = ({ gameLevel, newGame }) => {
         ]
     )
 
+    // Arbre du jeu
     const tree = new Tree(0, gameBoard)
 
+    /**
+     * Etats des paramètres de jeu
+     */ 
     const [player, setPlayer] = useState(players[0])
     const [whatToDo, setToDo] = useState([todos[1]])
 
@@ -64,8 +99,17 @@ const Game = ({ gameLevel, newGame }) => {
 
     const [playing, setPlaying] = useState(true)
 
+    /**
+     * Si le jeu est en cours, cette fonction permet d'actualiser 
+     * l'etat de la pièce selectionné
+     * 
+     * @param {*} pieceDesc description de la pièce selectionné
+     */
     const pieceSelected = (pieceDesc) => {
         if (playing) {
+            // Aucun pièce n'est confirmé
+            // On peut encore changer la pièce
+            // Sinon impossible
             if (!pieceConfirmed) {
                 setSelectedPiece(pieceDesc)
             }
@@ -77,6 +121,11 @@ const Game = ({ gameLevel, newGame }) => {
         console.log(tree.root.configuration)
     }
 
+    /**
+     * Une fois une pièce est confirmé, l'état de la selection de pièce en false
+     * ce qui ne permet pas au joueur de changer la pièce.
+     * Et on donne au joueur suivant a jouer.
+     */
     const handleConfirmation = () => {
         if (playing) {
             if (selectedPiece !== '') {
@@ -92,9 +141,18 @@ const Game = ({ gameLevel, newGame }) => {
         }
     }
 
+    /**
+     * Permet de placer la pièce dans une case selectionné
+     * 
+     * @param {*} number numéro de la case selectionné 
+     */
     const tileSelected = (number) => {
+        // Si on cours de jeu
         if (playing) {
+            // Si la pièce est confirmé
             if (pieceConfirmed) {   
+                // Si la case selectionné est vide
+                // On place la pièce dans la case
                 if (gameBoard[number] === "") {
                     let board = gameBoard.map ((tile, index) => index === number ? selectedPiece : tile)
                     setGameBoard(board)
@@ -103,10 +161,14 @@ const Game = ({ gameLevel, newGame }) => {
 
                     tree.root.configuration = copy(board)
 
+                    // Vérifier si la partie est fini
+                    // Vérification si le joueur a gagné
+                    // Sinon on génére l'arbre du jeu a partir de cette position
                     if (Level.checkForAWin(board, gameLevel)) {
                         setPlaying(false)
                     } else if (tree.ready()) {
                         let remainingPieces = initialPieces.filter (piece => !usedPieces.includes(piece))
+                        // Générer l'arbre du jeu
                         let createdTree = createTree(tree, remainingPieces, 1)
                     }
                 }
@@ -117,6 +179,9 @@ const Game = ({ gameLevel, newGame }) => {
         }
     }
 
+    /**
+     * Créer une nouvelle
+     */
     const handleNewGame = () => {
         newGame()
     }
@@ -159,87 +224,6 @@ const Game = ({ gameLevel, newGame }) => {
             </div>
         </div>
     )
-}
-
-class TreeNode {
-	constructor(key, configuration, parent = null) {
-		this.key = key;
-		this.configuration = configuration;
-		this.parent = parent;
-		this.children = [];
-	}
-
-	get isLeaf() {
-		return this.children.length === 0;
-	}
-
-	get hasChildren() {
-		return !this.isLeaf;
-	}
-}
-
-class Tree {
-	constructor(key, configuration) {
-		this.root = new TreeNode(key, configuration);
-	}
-
-	*preOrderTraversal(node = this.root) {
-		yield node;
-		if (node.children.length) {
-			for (let child of node.children) {
-				yield* this.preOrderTraversal(child);
-			}
-		}
-	}
-
-	*postOrderTraversal(node = this.root) {
-		if (node.children.length) {
-			for (let child of node.children) {
-				yield* this.postOrderTraversal(child);
-			}
-		}
-		yield node;
-	}
-
-    ready() {
-        let placeePieces = 0
-
-        for (let i = 0; i < this.root.configuration.length; i++) {
-            if (this.root.configuration[i] !== '') placeePieces++
-        }
-
-        return placeePieces >= 2
-    }
-
-	insert(parentNodeKey, key, configuration) {
-		for (let node of this.preOrderTraversal()) {
-			if (node.key === parentNodeKey) {
-				node.children.push(new TreeNode(key, configuration, node));
-				return true;
-			}
-		}
-		return false;
-	}
-
-	remove(key) {
-		for (let node of this.preOrderTraversal()) {
-			const filtered = node.children.filter(c => c.key !== key);
-			if (filtered.length !== node.children.length) {
-				node.children = filtered;
-				return true;
-			}
-		}
-		return false;
-	}
-
-	find(key) {
-		for (let node of this.preOrderTraversal()) {
-			if (node.key === key) {
-				return node;
-			}
-		}
-		return undefined;
-	}
 }
 
 export default Game

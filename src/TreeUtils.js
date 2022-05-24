@@ -1,3 +1,11 @@
+/**
+ * Renvoie un arbre de jeu avec une profondeur donné
+ * 
+ * @param {*} tree arbre de jeu 
+ * @param {*} pieces pieces de jeu
+ * @param {*} depth profondeur, 1 par défaut
+ * @returns un arbre de jeu
+ */
 const createTree = (tree, pieces, depth = 1) => {
     if (depth === 0) {
         return tree

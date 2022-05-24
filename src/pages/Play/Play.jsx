@@ -6,24 +6,31 @@ import Game from '../../components/Game/Game'
 
 const Play = () => {
 
+    // Etat de niveau de jeu
     const [gameLevel, setGameLevel] = useState(0)
+
+    // Etat de la partie
     const [playing, setPlaying] = useState(false)
 
+    // Créer une partie de niveau 1
     const createLevelOneGame = () => {
         setGameLevel(1)
         setPlaying(true)
     }
 
+    // Créer une partie de niveau 2
     const createLevelTwoGame = () => {
         setGameLevel(2)
         setPlaying(true)
     }
 
+    // Créer une partie de niveau 3
     const createLevelThreeGame = () => {
         setGameLevel(3)
         setPlaying(true)
     }
 
+    // Créer une partie de niveau 4
     const createLevelFourGame = () => {
         setGameLevel(4)
         setPlaying(true)
