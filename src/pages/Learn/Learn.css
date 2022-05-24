@@ -1,0 +1,26 @@
+.learn {
+    width: 60vw;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 50px 15%;
+}
+
+.learn p, li {
+    width: 100%;
+}
+
+.learn img {
+    width: 100%;
+}
+
+#figures {
+    width: 90%;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
