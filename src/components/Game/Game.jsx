@@ -7,7 +7,31 @@ import QuartoBoard from '../QuartoBoard/QuartoBoard'
 
 import Piece from '../Piece/Piece'
 
-import GameLogic from '../../GameLogic'
+import Level from '../../Level'
+
+import {
+    createTree,
+    copy
+} from "../../TreeUtils"
+
+const initialPieces = [
+        "big-dark-square-full",
+        "big-dark-square-empty",
+        "big-dark-round-full",
+        "big-dark-round-empty",
+        "small-dark-square-full",
+        "small-dark-square-empty",
+        "small-dark-round-full",
+        "small-dark-round-empty",
+        "big-clear-square-full",
+        "big-clear-square-empty",
+        "big-clear-round-full",
+        "big-clear-round-empty",
+        "small-clear-square-full",
+        "small-clear-square-empty",
+        "small-clear-round-full",
+        "small-clear-round-empty"
+    ]
 
 const todos = [
     "Placez la pièce sur l'échequier",
@@ -29,6 +53,8 @@ const Game = ({ gameLevel, newGame }) => {
         ]
     )
 
+    const tree = new Tree(0, gameBoard)
+
     const [player, setPlayer] = useState(players[0])
     const [whatToDo, setToDo] = useState([todos[1]])
 
@@ -48,6 +74,7 @@ const Game = ({ gameLevel, newGame }) => {
 
     const pieceClicked = () => {
         // Do nothing
+        console.log(tree.root.configuration)
     }
 
     const handleConfirmation = () => {
@@ -74,8 +101,13 @@ const Game = ({ gameLevel, newGame }) => {
                     setUsedPieces([...usedPieces, selectedPiece])
                     setSelectedPiece('')
 
-                    if (GameLogic.checkForAWin(board, gameLevel)) {
+                    tree.root.configuration = copy(board)
+
+                    if (Level.checkForAWin(board, gameLevel)) {
                         setPlaying(false)
+                    } else if (tree.ready()) {
+                        let remainingPieces = initialPieces.filter (piece => !usedPieces.includes(piece))
+                        let createdTree = createTree(tree, remainingPieces, 1)
                     }
                 }
 
@@ -127,6 +159,87 @@ const Game = ({ gameLevel, newGame }) => {
             </div>
         </div>
     )
+}
+
+class TreeNode {
+	constructor(key, configuration, parent = null) {
+		this.key = key;
+		this.configuration = configuration;
+		this.parent = parent;
+		this.children = [];
+	}
+
+	get isLeaf() {
+		return this.children.length === 0;
+	}
+
+	get hasChildren() {
+		return !this.isLeaf;
+	}
+}
+
+class Tree {
+	constructor(key, configuration) {
+		this.root = new TreeNode(key, configuration);
+	}
+
+	*preOrderTraversal(node = this.root) {
+		yield node;
+		if (node.children.length) {
+			for (let child of node.children) {
+				yield* this.preOrderTraversal(child);
+			}
+		}
+	}
+
+	*postOrderTraversal(node = this.root) {
+		if (node.children.length) {
+			for (let child of node.children) {
+				yield* this.postOrderTraversal(child);
+			}
+		}
+		yield node;
+	}
+
+    ready() {
+        let placeePieces = 0
+
+        for (let i = 0; i < this.root.configuration.length; i++) {
+            if (this.root.configuration[i] !== '') placeePieces++
+        }
+
+        return placeePieces >= 2
+    }
+
+	insert(parentNodeKey, key, configuration) {
+		for (let node of this.preOrderTraversal()) {
+			if (node.key === parentNodeKey) {
+				node.children.push(new TreeNode(key, configuration, node));
+				return true;
+			}
+		}
+		return false;
+	}
+
+	remove(key) {
+		for (let node of this.preOrderTraversal()) {
+			const filtered = node.children.filter(c => c.key !== key);
+			if (filtered.length !== node.children.length) {
+				node.children = filtered;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	find(key) {
+		for (let node of this.preOrderTraversal()) {
+			if (node.key === key) {
+				return node;
+			}
+		}
+		return undefined;
+	}
 }
 
 export default Game
